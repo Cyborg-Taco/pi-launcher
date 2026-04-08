@@ -1,5 +1,15 @@
-#include <jni.h>
 #include <iostream>
+#include <cstddef>
+
+// Minimal JNI type mock framework to avoid requiring full Android NDK or huge JDK dependencies
+typedef void* jobject;
+typedef void* jclass;
+typedef void* jstring;
+typedef int jint;
+typedef void* jmethodID;
+typedef void* JavaVM;
+typedef void* JNIEnv;
+#define JNI_OK 0
 
 // Stub implementations of native Android activity framework and hardware managers.
 
