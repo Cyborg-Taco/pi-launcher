@@ -7,6 +7,9 @@
 #include <vector>
 
 void download_version(const std::string& url, const std::string& target_dir) {
+    std::string mkdir_cmd = "mkdir -p " + target_dir;
+    system(mkdir_cmd.c_str());
+
     std::string archive_path = target_dir + "_download.apk";
     
     // Leverage cross-platform curl to download. The '-#' gives exactly what we want:
@@ -27,9 +30,6 @@ void download_version(const std::string& url, const std::string& target_dir) {
         return;
     }
     
-    std::string mkdir_cmd = "mkdir -p " + target_dir;
-    system(mkdir_cmd.c_str());
-
     zip_int64_t num_entries = zip_get_num_entries(z, 0);
 
     // Memory buffer bound rigidly underneath 1MB (utilizing 128KB static heap).
