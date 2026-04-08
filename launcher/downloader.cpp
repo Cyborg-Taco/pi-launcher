@@ -52,6 +52,10 @@ void download_version(const std::string& url, const std::string& target_dir) {
                 zip_file_t* zf = zip_fopen_index(z, i, 0);
                 if (zf) {
                     std::string out_path = target_dir + "/" + n;
+                    size_t last_slash = out_path.find_last_of('/');
+                    if (last_slash != std::string::npos) {
+                        system(("mkdir -p \"" + out_path.substr(0, last_slash) + "\"").c_str());
+                    }
                     FILE* f_out = fopen(out_path.c_str(), "wb");
                     if (f_out) {
                         zip_int64_t bytes_read = 0;
